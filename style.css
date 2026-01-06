@@ -1,0 +1,87 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #1e90ff;
+}
+
+nav .logo {
+  color: white;
+  font-weight: bold;
+}
+
+nav .nav-links a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 20px;
+  background: #87cefa;
+  color: white;
+}
+
+/* Products */
+.products {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.discount {
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 5px;
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 3px;
+}
+
+button {
+  background: #1e90ff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background: #0d6efd;
+}
