@@ -1,0 +1,147 @@
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+
+function Home() {
+  return (
+    <>
+      <section className="hero">
+        <h2>Royal Jewellery</h2>
+        <p>Where elegance meets timeless beauty</p>
+        <p>Welcome to our store where you can find beauty of Jewellery</p>
+      </section>
+
+      <section className="highlights">
+        <img src="https://images-cdn.ubuy.co.in/694b9d154cbe40640b0c834d-45-pcs-gold-jewelry-set-for-women-dainty.jpg" />
+        <h3>Our Promise</h3>
+        <div className="highlight-boxes">
+          <div className="box"> Premium Diamonds</div>
+          <div className="box"> Pure Hallmarked Gold</div>
+          <div className="box"> Royal Craftsmanship</div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function Products() {
+  return (
+    <div className="page">
+      <h2>Jewellery Collection</h2>
+      <div className="cards">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvYzVR4m1fqq0Qddxt6ol3C7PMp2Ekc8KeNw&s" />
+        <div className="card">
+          <h4>Diamond Ring</h4>
+          <p>₹45,000</p>
+        </div>
+        <div className="card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0D5fGca4ejsyk02vctXIy-yhr_G9sPkqQLw&s" />
+          <h4>Gold Necklace</h4>
+          <p>₹1,25,000</p>
+        </div>
+        <div className="card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3wuVF3Z8plKNiinWsG7R9Oy6KKUVEcXYRJw&s" />
+          <h4>Gold Bangles</h4>
+          <p>₹90,000</p>
+        </div>
+        <div className="card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlzjAEDRsaspmxdCP3v1r8fcfMedeBem8gOw&s" />
+          <h4>Diamond Earrings</h4>
+          <p>₹55,000</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Cart() {
+  return (
+    <div className="page">
+      <h1>Your Cart</h1>
+      <h2>Your precious selections will appear here.</h2>
+      <h2>Hey! your product added to the cart </h2>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTkZmxHhVlo4ZP9dmRpFAgwzvdHWg7kLb0VA&s" />
+      <h4>
+        not feeling enough? Lets add some more to your cart and enjoy more
+        offers
+      </h4>
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <div className="about-page">
+      <section className="about-hero">
+        <h2>About Royal Jewellery</h2>
+        <p>
+          Crafting timeless jewellery that celebrates elegance, tradition, and
+          modern artistry.
+        </p>
+      </section>
+
+      <section className="about-content">
+        <p>
+          Royal Jewellery is dedicated to creating finely crafted pieces that
+          reflect beauty, precision, and trust. Each design is thoughtfully made
+          to mark life’s most meaningful moments.
+        </p>
+
+        <p>
+          We use only certified gold and authentic diamonds, ensuring every
+          creation meets the highest standards of quality and purity. Our
+          designs blend traditional craftsmanship with contemporary elegance,
+          making them perfect for both everyday wear and special occasions.
+        </p>
+
+        <p>
+          With a focus on transparency, customer satisfaction, and ethical
+          sourcing, Royal Jewellery continues to build lasting relationships
+          with those who value refinement and authenticity.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+function Contact() {
+  return (
+    <div className="page">
+      <h2>Contact Us</h2>
+      <p>📧 support@royaljewellery.com</p>
+      <p>📞 +91 98765 43210</p>
+      <p>📍 Hyderabad, India</p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="app">
+        <header className="navbar">
+          <h1>💍 Royal Jewellery</h1>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/products">Collection</Link>
+            <Link to="/cart">Cart</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+          </nav>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+
+        <footer className="footer">
+          © 2026 Royal Jewellery — Crafted with Elegance
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
