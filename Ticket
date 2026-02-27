@@ -1,0 +1,202 @@
+import { useState } from "react";
+
+function App() {
+  const [page, setPage] = useState("login");
+  const [employees, setEmployees] = useState(
+    JSON.parse(localStorage.getItem("employees")) || []
+  );
+  const [tickets, setTickets] = useState(
+    JSON.parse(localStorage.getItem("tickets")) || []
+  );
+  const [user, setUser] = useState(null);
+
+  const [signup, setSignup] = useState({
+    name: "",
+    email: "",
+    password: "",
+    department: "",
+    empId: "",
+  });
+
+  function register() {
+    employees.push(signup);
+    localStorage.setItem("employees", JSON.stringify(employees));
+    alert("Registered");
+    setPage("login");
+  }
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function login() {
+    if (email === "admin@techserve.com" && password === "admin123") {
+      setPage("admin");
+      return;
+    }
+
+    let found = employees.find(
+      (e) => e.email === email && e.password === password
+    );
+
+    if (found) {
+      setUser(found);
+      setPage("dashboard");
+    } else {
+      alert("Wrong details");
+    }
+  }
+
+  // ---------------- TICKET ----------------
+  const [ticket, setTicket] = useState({
+    title: "",
+    desc: "",
+    priority: "Low",
+  });
+
+  function submitTicket() {
+    let newTicket = {
+      id: Date.now(),
+      title: ticket.title,
+      desc: ticket.desc,
+      priority: ticket.priority,
+      status: "Open",
+      email: user.email,
+    };
+
+    let updated = [...tickets, newTicket];
+    setTickets(updated);
+    localStorage.setItem("tickets", JSON.stringify(updated));
+    alert("Ticket submitted");
+  }
+
+  // ---------------- UI ----------------
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>IT HelpDesk Portal</h2>
+
+      {/* SIGNUP */}
+      {page === "signup" && (
+        <>
+          <h3>Employee Signup</h3>
+          <input
+            placeholder="Name"
+            onChange={(e) => setSignup({ ...signup, name: e.target.value })}
+          />
+          <br />
+          <input
+            placeholder="Email"
+            onChange={(e) => setSignup({ ...signup, email: e.target.value })}
+          />
+          <br />
+          <input
+            placeholder="Password"
+            onChange={(e) => setSignup({ ...signup, password: e.target.value })}
+          />
+          <br />
+          <input
+            placeholder="Department"
+            onChange={(e) =>
+              setSignup({ ...signup, department: e.target.value })
+            }
+          />
+          <br />
+          <input
+            placeholder="Employee ID"
+            onChange={(e) => setSignup({ ...signup, empId: e.target.value })}
+          />
+          <br />
+          <button onClick={register}>Register</button>
+          <p onClick={() => setPage("login")}>Go to Login</p>
+        </>
+      )}
+
+      {/* LOGIN */}
+      {page === "login" && (
+        <>
+          <h3>Login</h3>
+          <input
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <button onClick={login}>Login</button>
+          <p onClick={() => setPage("signup")}>New user? Signup</p>
+        </>
+      )}
+
+      {/* DASHBOARD */}
+      {page === "dashboard" && (
+        <>
+          <h3>Welcome {user.name}</h3>
+
+          <h4>Submit Ticket</h4>
+          <input
+            placeholder="Issue Title"
+            onChange={(e) => setTicket({ ...ticket, title: e.target.value })}
+          />
+          <br />
+          <textarea
+            placeholder="Description"
+            onChange={(e) => setTicket({ ...ticket, desc: e.target.value })}
+          />
+          <br />
+          <select
+            onChange={(e) => setTicket({ ...ticket, priority: e.target.value })}
+          >
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          <br />
+          <button onClick={submitTicket}>Submit</button>
+
+          <h4>My Tickets</h4>
+          {tickets
+            .filter((t) => t.email === user.email)
+            .map((t) => (
+              <div key={t.id}>
+                <p>
+                  {t.title} - {t.status}
+                </p>
+              </div>
+            ))}
+
+          <button onClick={() => setPage("login")}>Logout</button>
+        </>
+      )}
+
+      {/* ADMIN */}
+      {page === "admin" && (
+        <>
+          <h3>Admin Dashboard</h3>
+          {tickets.map((t) => (
+            <div key={t.id}>
+              <p>{t.title}</p>
+              <select
+                onChange={(e) => {
+                  t.status = e.target.value;
+                  localStorage.setItem("tickets", JSON.stringify(tickets));
+                  setTickets([...tickets]);
+                }}
+              >
+                <option>Open</option>
+                <option>In Progress</option>
+                <option>Closed</option>
+              </select>
+            </div>
+          ))}
+          <button onClick={() => setPage("login")}>Logout</button>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default App;
